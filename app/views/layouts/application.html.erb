@@ -8,7 +8,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-  <% if !user_signed_in? %>
+  <% if !user_signed_in? && (controller_name == "welcome" && action_name == "index") %>
   <div style="text-align:center; margin-top:5em;">
     <%= link_to "Sign in with Instagram", "/users/auth/instagram", :class => "btn-instagram text-center" %>
   </div>
@@ -36,4 +36,9 @@
   </div>
   <%= yield %>
 </body>
+<% if !user_signed_in? && (controller_name == "welcome" && action_name == "index") %>
+  <div class="row" style="position:fixed;bottom:0px;width:110%; height:50px;background-color:#E8E8E8;">
+    <%= link_to "Privacy Policy", privacy_policy_path, style: "display:block;float:right;position:relative;right:10%;top:15px;" %>
+  </div>
+<% end %>
 </html>

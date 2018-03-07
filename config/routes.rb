@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     :omniauth_callbacks => 'omniauth_callbacks'
   }
 
-  get "/show_current_user_feeds" => 'feeds#show_current_user_feeds', as: :show_current_user_feeds
+  get "/show_current_user_feeds" => "feeds#show_current_user_feeds", as: :show_current_user_feeds
+  get "/privacy_policy" => "welcome#privacy", as: :privacy_policy
 end
