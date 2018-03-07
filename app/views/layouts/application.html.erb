@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SampleInstagram</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>SampleInstagram</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+<% if !user_signed_in? %>
+<div style="text-align:center; margin-top:5em;">
+  <%= link_to "Sign in with Instagram", "/users/auth/instagram", :class => "btn-instagram" %>
+</div>
+<% end %>
+<body>
+  <%= yield %>
+</body>
 </html>

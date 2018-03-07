@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Sample Instagram</title>
+</head>
+<body>
+<div class="row" style="padding:0px; position:fixed; top:0; width:100%; z-index:2; height:20.5px;background-color:#f9f9f9;">
+  <div class="col-xs-4" style=" background-color:#f9f9f9;">
+    <%= image_tag "top1.png", style: "height:20.5px;" %>
+  </div>
+  <div class="col-xs-4 text-right" style="padding-right:15%">
+    <span id="time"></span>
+  </div>
+  <div class="col-xs-4">
+    <% if user_signed_in? %>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <%= image_tag "log_out.png", size: "20x20", style: "right:18px;position:absolute;top:2px;" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="container text-center" style="background-color:#f9f9f9;height:44.5px;border-bottom:solid 1px #b2b2b2; position: fixed; top:20.5px; width:100%; z-index:2;">
+    <h2 style="margin-top:4px; color:#42136A;">Sample Instagram</h2>
+</div>
+<% if @feeds["data"].any? %>
+  <% @feeds["data"].each do |feed| %>
+  <div class="container" style="overflow:hidden;">
+    <div class="row" style="margin-top: 70px;">
+      <div class="col-xs-2">
+        <%= image_tag "#{feed['user'].present? && feed['user']['profile_picture'].present? ? feed['user']['profile_picture'] : lf3.png }", :class => 'img-circle' %>
+        </div>
+        <div class="col-xs-8" style="padding-left:12px;">
+          <div class="col-xs-12">
+          <b>
+            <p style="margin-bottom:0px;"><%= feed["user"].present? && feed["user"]["full_name"].present? ? feed["user"]["full_name"] : "No Full Name" %>
+            </p>
+          </b>
+        </div>
+        <div class="col-xs-12">
+        <% binding.pry %>
+          <p><%= feed["location"].present? && feed["location"]["name"].present? ? feed["location"]["name"] : "No Location Present" %>
+          </p>
+        </div>
+        </div>
+        <div class="col-xs-2" style="padding-left:5px;">
+          <%= image_tag "images.png", style: "width:40%" %>
+        </div>
+    </div>
+    <div class="row">
+      <%= image_tag "#{feed["images"].present? && feed["images"]["standard_resolution"].present? && feed["images"]["standard_resolution"]["url"].present? ? feed["images"]["standard_resolution"]["url"] : lf2.png }", :style => "width:100%;" %>
+    </div>
+    <div class="row">
+      <%= image_tag "feedb.png", width: "30%" %>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <p style="color:grey;"><%= feed["created_time"].present? ? time_ago_in_words(Time.at(feed["created_time"].to_i)) + " ago" : 0 %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="bottom:0px; height:44.5px; background-color:#f9f9f9;height:44.5px;border-bottom:solid 1px #b2b2b2; position: fixed; width:100%; z-index:2;">
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-1" style="padding-top:6px;">
+          <%= link_to root_path do %>
+            <%= image_tag "home-128.png", style: "height:34.5px;" %>
+          <% end %>
+      </div>
+      <div class="col-xs-2" style="padding-top:6px;">
+        <a href="hamper.html">
+          <%= image_tag "81092.png", style: "height:34.5px;" %>
+        </a>
+      </div>
+      <div class="col-xs-2">
+        <a href="camera.html">
+        <%= image_tag "icon-camera-128-2.png", style: "height: 44.5px;" %>
+        </a>
+      </div>
+      <div class="col-xs-2" style="padding-top:6px;">
+        <a href="notifications.html">
+          <%= image_tag "52646-2002.png", style: "height: 34.5px;" %>
+        </a>
+      </div>
+      <div class="col-xs-2" style="padding-top:6px;">
+        <a href="profile.html">
+          <%= image_tag "#{feed['user'].present? && feed['user']['profile_picture'].present? ? feed['user']['profile_picture'] : lf4.png }", :class=> "img-circle" , style: "height: 34.5px;" %>
+        </a>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <% else %>
+  <h1 class="text-center" style="left: 0;line-height: 200px;margin: auto;margin-top: -100px;position: absolute;top: 50%;width: 100%;">No Feeds</h1>
+  <div class="container" style="bottom:0px; height:44.5px; background-color:#f9f9f9;height:44.5px;border-bottom:solid 1px #b2b2b2; position: fixed; width:100%; z-index:2;">
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-1" style="padding-top:6px;">
+          <%= link_to root_path do %>
+            <%= image_tag "home-128.png", style: "height:34.5px;" %>
+          <% end %>
+      </div>
+      <div class="col-xs-2" style="padding-top:6px;">
+        <a href="hamper.html">
+          <%= image_tag "81092.png", style: "height:34.5px;" %>
+        </a>
+      </div>
+      <div class="col-xs-2">
+        <a href="camera.html">
+        <%= image_tag "icon-camera-128-2.png", style: "height: 44.5px;" %>
+        </a>
+      </div>
+      <div class="col-xs-2" style="padding-top:6px;">
+        <a href="notifications.html">
+          <%= image_tag "52646-2002.png", style: "height: 34.5px;" %>
+        </a>
+      </div>
+      <div class="col-xs-2" style="padding-top:6px;">
+        <a href="profile.html">
+          <%= image_tag "lf4.png", :class => "img-circle", style: "height: 34.5px;" %>
+        </a>
+      </div>
+      <div class="col-xs-2" style="padding-top:6px;">
+        <% if user_signed_in? %>
+          <%= link_to destroy_user_session_path do %>
+            <%= image_tag "log_out.png", style: "height:34.5px;" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+var today = new Date();
+var hours = today.getHours();
+  var minutes = today.getMinutes();
+  
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ';
+
+document.getElementById('time').innerHTML=strTime;
+</script>
+</body>
+</html>
