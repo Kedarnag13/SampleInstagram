@@ -28,6 +28,9 @@
 <div class="container text-center" style="background-color:#f9f9f9;height:44.5px;border-bottom:solid 1px #b2b2b2; position: fixed; top:20.5px; width:100%; z-index:2;">
     <h2 style="margin-top:4px; color:#42136A;">Sample Instagram</h2>
 </div>
+<div class="container">
+  <%= render :partial=>"/layouts/common/flash_message" -%>
+</div>
 <% if @feeds["data"].any? %>
   <% @feeds["data"].each do |feed| %>
   <div class="container" style="overflow:hidden;">
@@ -67,29 +70,21 @@
   <div class="container" style="bottom:0px; height:44.5px; background-color:#f9f9f9;height:44.5px;border-bottom:solid 1px #b2b2b2; position: fixed; width:100%; z-index:2;">
     <div class="row">
       <div class="col-xs-2 col-xs-offset-1" style="padding-top:6px;">
-          <%= link_to root_path do %>
-            <%= image_tag "home-128.png", style: "height:34.5px;" %>
+          <%= link_to "#" do %>
+            <%= image_tag "home-128.png", style: "height:34.5px;", :class => "scrollToTop" %>
           <% end %>
       </div>
       <div class="col-xs-2" style="padding-top:6px;">
-        <a href="hamper.html">
-          <%= image_tag "81092.png", style: "height:34.5px;" %>
-        </a>
+        <%= image_tag "81092.png", style: "height:34.5px;" %>
       </div>
       <div class="col-xs-2">
-        <a href="camera.html">
         <%= image_tag "icon-camera-128-2.png", style: "height: 44.5px;" %>
-        </a>
       </div>
       <div class="col-xs-2" style="padding-top:6px;">
-        <a href="notifications.html">
-          <%= image_tag "52646-2002.png", style: "height: 34.5px;" %>
-        </a>
+        <%= image_tag "52646-2002.png", style: "height: 34.5px;" %>
       </div>
       <div class="col-xs-2" style="padding-top:6px;">
-        <a href="profile.html">
-          <%= image_tag "#{feed['user'].present? && feed['user']['profile_picture'].present? ? feed['user']['profile_picture'] : lf4.png }", :class=> "img-circle" , style: "height: 34.5px;" %>
-        </a>
+        <%= image_tag "#{feed['user'].present? && feed['user']['profile_picture'].present? ? feed['user']['profile_picture'] : lf4.png }", :class=> "img-circle" , style: "height: 34.5px;" %>
       </div>
     </div>
   </div>
@@ -99,29 +94,21 @@
   <div class="container" style="bottom:0px; height:44.5px; background-color:#f9f9f9;height:44.5px;border-bottom:solid 1px #b2b2b2; position: fixed; width:100%; z-index:2;">
     <div class="row">
       <div class="col-xs-2 col-xs-offset-1" style="padding-top:6px;">
-          <%= link_to root_path do %>
-            <%= image_tag "home-128.png", style: "height:34.5px;" %>
+          <%= link_to "#" do %>
+            <%= image_tag "home-128.png", style: "height:34.5px;", :class => "scrollToTop" %>
           <% end %>
       </div>
       <div class="col-xs-2" style="padding-top:6px;">
-        <a href="hamper.html">
-          <%= image_tag "81092.png", style: "height:34.5px;" %>
-        </a>
+        <%= image_tag "81092.png", style: "height:34.5px;" %>
       </div>
       <div class="col-xs-2">
-        <a href="camera.html">
         <%= image_tag "icon-camera-128-2.png", style: "height: 44.5px;" %>
-        </a>
       </div>
       <div class="col-xs-2" style="padding-top:6px;">
-        <a href="notifications.html">
-          <%= image_tag "52646-2002.png", style: "height: 34.5px;" %>
-        </a>
+        <%= image_tag "52646-2002.png", style: "height: 34.5px;" %>
       </div>
       <div class="col-xs-2" style="padding-top:6px;">
-        <a href="profile.html">
-          <%= image_tag "lf4.png", :class => "img-circle", style: "height: 34.5px;" %>
-        </a>
+        <%= image_tag "lf4.png", :class => "img-circle", style: "height: 34.5px;" %>
       </div>
       <div class="col-xs-2" style="padding-top:6px;">
         <% if user_signed_in? %>
@@ -138,13 +125,29 @@
 var today = new Date();
 var hours = today.getHours();
   var minutes = today.getMinutes();
-  
+
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
   minutes = minutes < 10 ? '0'+minutes : minutes;
   var strTime = hours + ':' + minutes + ' ';
 
 document.getElementById('time').innerHTML=strTime;
+
+$(document).ready(function() {
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 600) {
+            $(".scrollToTop").fadeIn(1000)
+        } else {
+            $(".scrollToTop").fadeOut(1000);
+        }
+    });
+
+    //Click event to scroll to top
+    $(".scrollToTop").click(function(){
+        $('html, body').animate({scrollTop : 0},500);
+        return false;
+    });
+}
 </script>
 </body>
 </html>
